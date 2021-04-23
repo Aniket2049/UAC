@@ -1,0 +1,197 @@
+h1, h2, h3 {
+	text-align: center;
+}
+
+.centerTable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.bigButton {
+	width: 100px;
+	background-color: #576ee4;
+	color: white;
+	padding: 40px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 2px solid #576ee4;
+}
+
+.bigButton:hover {
+	background-color: white;
+	color: #576ee4;
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+input[type=text], input[type=password], input[type=number], select {
+	font-family: 'Fira Sans';
+	width: 100%;
+	padding: 10px 10px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus,
+	select:focus {
+	border: 1px solid #576ee4;
+	border-radius: 3px;
+}
+
+.button {
+	font-family: 'Fira Sans';
+	width: 100%;
+	padding: 10px 10px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	background-color: #576ee4;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 2px solid #576ee4;
+}
+
+.button:hover {
+	background-color: white;
+	color: #576ee4;
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.formDiv {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 3px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+
+.adminFormDiv {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 3px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+
+.infoTable {
+	border-collapse: collapse;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.infoTableStudent {
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	width: 75%;
+}
+
+.infoTH, .infoTD {
+	border: 1px solid #ddd;
+	text-align: center;
+	padding: 8px;
+}
+
+.infoTH {
+	background-color: #576ee4;
+	color: white;
+}
+
+.infoTR:nth-child(even) {
+	background-color: #f2f2f2
+}
+
+.rankNotif {
+	text-align: center;
+	padding: 10px;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	border-color: #576ee4;
+}
+
+.infoMsg, .errorMsg, .successMsg {
+	text-align: center;
+	padding: 10px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	color: white;
+	border-style: double;
+	border-color: white;
+	border-radius: 3px;
+	font-size: 14px;
+	border-radius: 3px;
+}
+
+.infoMsg {
+	background-color: #576ee4;
+}
+
+.errorMsg {
+	background-color: #ee6055;
+}
+
+.successMsg {
+	background-color: #56da65;
+}
+
+.logoutButton, .goHomeButton {
+	font-family: 'Fira Sans';
+	width: 120px;
+	height: 40px; 
+	padding : 10px 10px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 3px;
+	padding: 10px 10px;
+}
+
+.goHomeButton {
+	border: 2px solid #576ee4;
+	background-color: white;
+	color: #576ee4;
+}
+
+.goHomeButton:hover {
+	background-color: #576ee4;
+	color: white;
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
+
+.logoutButton {
+	border: 2px solid #ee6055;
+	background-color: #ee6055;
+	color: white;
+}
+
+.logoutButton:hover {
+	background-color: white;
+	color: #ee6055;
+	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0
+		rgba(0, 0, 0, 0.19);
+}
