@@ -27,6 +27,11 @@
 		{
 			font-family : 'Fira Sans Condensed';
 		}
+		
+		a:hover
+		{
+			box-shadow : 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+		}
 	</style>
 
 </head>
@@ -39,10 +44,10 @@
 	<div class = "row">
 		<div class = "col-sm-4"></div>
 		<div class = "col-sm-2">
-			<a href = "login-form" class = "btn btn-primary btn-block">Login</a>
+			<a href = "login-form" class = "btn btn-secondary btn-block">Login</a>
 		</div>
 		<div class = "col-sm-2">
-			<a href = "registration" class = "btn btn-success btn-block">Register</a>
+			<a href = "registration" class = "btn btn-secondary btn-block">Register</a>
 		</div>
 		<div class = "col-sm-4"></div>
 	</div>
