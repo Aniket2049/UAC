@@ -1,12 +1,8 @@
 package as.uac.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
+import as.uac.bean.PreferenceListOption;
+import as.uac.entity.Institute;
+import as.uac.utility.Utility;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -15,9 +11,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import as.uac.bean.PreferenceListOption;
-import as.uac.entity.Institute;
-import as.uac.utility.Utility;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class StudentDAO
@@ -29,17 +28,17 @@ public class StudentDAO
 	private Environment environment;
 	
 	@Transactional
-	public List<String> GetInstitueNames()
+	public List<String> GetInstitueNames ()
 	{
-		Session				session				= sessionFactory.getCurrentSession();
-		Query<Institute>	institutes_query	= session.createQuery("from Institute", Institute.class);
-		List<Institute>		institutes			= null;
-		List<String>		instituteNames		= null;
+		Session          session          = sessionFactory.getCurrentSession();
+		Query<Institute> institutes_query = session.createQuery("from Institute", Institute.class);
+		List<Institute>  institutes       = null;
+		List<String>     instituteNames   = null;
 		
 		try
 		{
-			institutes		= institutes_query.getResultList();
-			instituteNames	= new ArrayList<String>();
+			institutes     = institutes_query.getResultList();
+			instituteNames = new ArrayList<String>();
 		}
 		catch (Exception e)
 		{
@@ -57,34 +56,34 @@ public class StudentDAO
 		return instituteNames;
 	}
 	
-	public String GetAdmission(List<PreferenceListOption> preferenceList, int rank)
+	public String GetAdmission (List<PreferenceListOption> preferenceList, int rank)
 	{
 		String admissionResult = "You failed to secure a seat";
 		
 		try
 		{
-			String	jdbcDriver	= environment.getProperty("jdbc.driver");
-			String	jdbcURL		= environment.getProperty("jdbc.url");
-			String	db_username	= environment.getProperty("jdbc.user");
-			String	db_password	= environment.getProperty("jdbc.password");
+			String jdbcDriver  = environment.getProperty("jdbc.driver");
+			String jdbcURL     = environment.getProperty("jdbc.url");
+			String db_username = environment.getProperty("jdbc.user");
+			String db_password = environment.getProperty("jdbc.password");
 			
 			Class.forName(jdbcDriver);
-			Connection	connection	= DriverManager.getConnection(jdbcURL, db_username, db_password);
-			Statement	statement	= connection.createStatement();
-			String		query		= "";
-			int			dbCutOff	= 0;
+			Connection connection = DriverManager.getConnection(jdbcURL, db_username, db_password);
+			Statement  statement  = connection.createStatement();
+			String     query      = "";
+			int        dbCutOff   = 0;
 			
 			System.out.println("\nCHECKING PREFERNCE LIST OPTIONS FOR DB MATCH");
 			for (int i = 0; i < preferenceList.size(); i++)
 			{
-				PreferenceListOption	pListOption		= preferenceList.get(i);
-				String					dbCourseColName	= Utility.MapCourseNameToDBColumnName(pListOption.getCourse());
+				PreferenceListOption pListOption     = preferenceList.get(i);
+				String               dbCourseColName = Utility.MapCourseNameToDBColumnName(pListOption.getCourse());
 				
 				System.out.println((i + 1) + "\nCOURSE --> 		" + pListOption.getCourse());
 				System.out.println("INSTITUTION --> " + pListOption.getInstitute());
 				
-				query = "SELECT " + dbCourseColName + " FROM `uac_db1`.`cutoff` WHERE `name` = '"
-						+ pListOption.getInstitute() + "';";
+				query = "SELECT " + dbCourseColName + " FROM `uac_db1`.`cutoff` WHERE `name` = '" +
+				        pListOption.getInstitute() + "';";
 				ResultSet resultSet = statement.executeQuery(query);
 				System.out.println("\nQUERY EXECUTED SUCCESSFULLY");
 				System.out.println("QUERY --> " + query);
@@ -97,11 +96,11 @@ public class StudentDAO
 				}
 				if (dbCutOff >= rank)
 				{
-					System.out.println("ADMISSION SUCCESSFUL FOR " + pListOption.getCourse() + " AT "
-							+ pListOption.getInstitute());
+					System.out.println(
+						"ADMISSION SUCCESSFUL FOR " + pListOption.getCourse() + " AT " + pListOption.getInstitute());
 					
-					query = "UPDATE `uac_db1`.`seats` SET " + dbCourseColName + " = " + dbCourseColName
-							+ " - 1 WHERE `name` = '" + pListOption.getInstitute() + "';";
+					query = "UPDATE `uac_db1`.`seats` SET " + dbCourseColName + " = " + dbCourseColName +
+					        " - 1 WHERE `name` = '" + pListOption.getInstitute() + "';";
 					int dbSeatUpdateStatus = statement.executeUpdate(query);
 					if (dbSeatUpdateStatus > 0)
 					{
@@ -110,12 +109,13 @@ public class StudentDAO
 					}
 					else
 					{
-						System.out.println("!!! COULD NOT UPDATE SEAT AFTER SUCCESSFUL ADMISSION IN "
-								+ pListOption.getInstitute() + " WITH COURSE " + pListOption.getCourse());
+						System.out.println(
+							"!!! COULD NOT UPDATE SEAT AFTER SUCCESSFUL ADMISSION IN " + pListOption.getInstitute() +
+							" WITH COURSE " + pListOption.getCourse());
 					}
 					
-					admissionResult = "ADMISSION SUCCESSFUL with " + pListOption.getCourse() + " AT "
-							+ pListOption.getInstitute();
+					admissionResult =
+						"ADMISSION SUCCESSFUL with " + pListOption.getCourse() + " AT " + pListOption.getInstitute();
 					break;
 				}
 				

@@ -1,11 +1,6 @@
 package as.uac.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -27,73 +22,73 @@ public class User
 	@Column(name = "privilege")
 	private String privilege;
 	
-	public User()
+	public User ()
 	{
 	}
 	
-	public User(String name, String username, String password, String privilege)
+	public User (String name, String username, String password, String privilege)
 	{
-		this.name		= name;
-		this.username	= username;
-		this.password	= password;
-		this.privilege	= privilege;
+		this.name      = name;
+		this.username  = username;
+		this.password  = password;
+		this.privilege = privilege;
 	}
 	
-	public User(int id, String name, String username, String password, String privilege)
+	public User (int id, String name, String username, String password, String privilege)
 	{
-		this.id			= id;
-		this.name		= name;
-		this.username	= username;
-		this.password	= password;
-		this.privilege	= privilege;
+		this.id        = id;
+		this.name      = name;
+		this.username  = username;
+		this.password  = password;
+		this.privilege = privilege;
 	}
 	
-	public int getId()
+	public int getId ()
 	{
 		return id;
 	}
 	
-	public void setId(int id)
+	public void setId (int id)
 	{
 		this.id = id;
 	}
 	
-	public String getName()
+	public String getName ()
 	{
 		return name;
 	}
 	
-	public void setName(String name)
+	public void setName (String name)
 	{
 		this.name = name;
 	}
 	
-	public String getUsername()
+	public String getUsername ()
 	{
 		return username;
 	}
 	
-	public void setUsername(String username)
+	public void setUsername (String username)
 	{
 		this.username = username;
 	}
 	
-	public String getPassword()
+	public String getPassword ()
 	{
 		return password;
 	}
 	
-	public void setPassword(String password)
+	public void setPassword (String password)
 	{
 		this.password = password;
 	}
 	
-	public String getPrivilege()
+	public String getPrivilege ()
 	{
 		return privilege;
 	}
 	
-	public void setPrivilege(String privilege)
+	public void setPrivilege (String privilege)
 	{
 		this.privilege = privilege;
 	}

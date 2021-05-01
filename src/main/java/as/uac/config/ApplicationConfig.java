@@ -1,9 +1,6 @@
 package as.uac.config;
 
-import java.util.Properties;
-
-import javax.sql.DataSource;
-
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +17,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
@@ -32,9 +30,9 @@ public class ApplicationConfig implements WebMvcConfigurer
 	@Autowired
 	private Environment environment;
 	
-	// ----- VIEW RESOLVER FOR SPRING WEB MVC -----//
+	// ----- VIEW RESOLVER FOR SPRING WEB MVC ----- //
 	@Bean
-	public ViewResolver viewResolver()
+	public ViewResolver viewResolver ()
 	{
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		
@@ -44,16 +42,28 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return viewResolver;
 	}
 	
-	// ----- FOR CSS/JS/OTHER HTML STUFF -----//
+	// ----- FOR CSS/JS/OTHER HTML STUFF ----- //
 	@Override
-	public void addResourceHandlers(final ResourceHandlerRegistry registry)
+	public void addResourceHandlers (final ResourceHandlerRegistry registry)
 	{
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
-	// ----- HIBERNATE SETTINGS -----//
 	@Bean
-	public DataSource DataSource()
+	public LocalSessionFactoryBean FactoryBean ()
+	{
+		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+		
+		factoryBean.setDataSource(DataSource());
+		factoryBean.setPackagesToScan(environment.getProperty("hiberante.packagesToScan"));
+		factoryBean.setHibernateProperties(GetHibernateProperties());
+		
+		return factoryBean;
+	}
+	
+	// ----- HIBERNATE SETTINGS ----- //
+	@Bean
+	public DataSource DataSource ()
 	{
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		
@@ -77,7 +87,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return dataSource;
 	}
 	
-	private Properties GetHibernateProperties()
+	private Properties GetHibernateProperties ()
 	{
 		Properties props = new Properties();
 		
@@ -87,33 +97,22 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return props;
 	}
 	
-	@Bean
-	public LocalSessionFactoryBean FactoryBean()
+	// ----- UTILITY METHOD TO CONVERT STRING TO INT ----- //
+	private int GetIntProperty (String propName)
 	{
-		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+		String propVal    = environment.getProperty(propName);
+		int    intPropVal = Integer.parseInt(propVal);
 		
-		factoryBean.setDataSource(DataSource());
-		factoryBean.setPackagesToScan(environment.getProperty("hiberante.packagesToScan"));
-		factoryBean.setHibernateProperties(GetHibernateProperties());
-		
-		return factoryBean;
+		return intPropVal;
 	}
 	
 	@Bean
 	@Autowired
-	public HibernateTransactionManager TransactionManager(SessionFactory sessionFactory)
+	public HibernateTransactionManager TransactionManager (SessionFactory sessionFactory)
 	{
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
 		
 		return txManager;
-	}
-	
-	private int GetIntProperty(String propName)
-	{
-		String	propVal		= environment.getProperty(propName);
-		int		intPropVal	= Integer.parseInt(propVal);
-		
-		return intPropVal;
 	}
 }

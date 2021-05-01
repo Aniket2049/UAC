@@ -1,18 +1,18 @@
 package as.uac.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController
 {
 	
 	@RequestMapping("/")
-	public String ShowHome(HttpServletRequest request, Model model)
+	public String ShowHome (HttpServletRequest request, Model model)
 	{
 		HttpSession httpSession = null;
 		

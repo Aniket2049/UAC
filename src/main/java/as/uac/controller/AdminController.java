@@ -1,16 +1,15 @@
 package as.uac.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import as.uac.service.AdminService;
+import as.uac.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import as.uac.service.AdminService;
-import as.uac.utility.Utility;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class AdminController
@@ -19,10 +18,10 @@ public class AdminController
 	AdminService adminService;
 	
 	@RequestMapping("/admin")
-	public String ShowAdmin(HttpServletRequest request, Model model)
+	public String ShowAdmin (HttpServletRequest request, Model model)
 	{
-		HttpSession	httpSession	= request.getSession();
-		String		whoIs		= (String) httpSession.getAttribute(LoginController.WHO_IS);
+		HttpSession httpSession = request.getSession();
+		String      whoIs       = (String) httpSession.getAttribute(LoginController.WHO_IS);
 		
 		if ((whoIs != null) && whoIs.equalsIgnoreCase("admin"))
 		{
@@ -36,22 +35,29 @@ public class AdminController
 		}
 	}
 	
-	@PostMapping("/seatOp")
-	public String ProcessSeatOperation(HttpServletRequest request, Model model)
+	public void AddAdminStuff (Model model)
 	{
-		HttpSession	httpSession	= request.getSession();
-		String		whoIs		= (String) httpSession.getAttribute(LoginController.WHO_IS);
+		model.addAttribute("title", "UAC Administrators Area");
+		model.addAttribute("courses", Utility.GetCoursesNames());
+		model.addAttribute("institutes", adminService.GetAllInstitutes());
+	}
+	
+	@PostMapping("/seatOp")
+	public String ProcessSeatOperation (HttpServletRequest request, Model model)
+	{
+		HttpSession httpSession = request.getSession();
+		String      whoIs       = (String) httpSession.getAttribute(LoginController.WHO_IS);
 		
-		if (!whoIs.equalsIgnoreCase("admin"))
+		if (! whoIs.equalsIgnoreCase("admin"))
 		{
 			model.addAttribute("loginPageMessage", Utility.HTMLInfoFormat("Login as ADMIN to access!", "error"));
 			return "login";
 		}
 		
-		String	institute	= request.getParameter("SOP_institute");
-		String	branch		= request.getParameter("SOP_branch");
-		String	operation	= request.getParameter("SOP_operation");
-		String	magnitude	= request.getParameter("SOP_magnitude");
+		String institute = request.getParameter("SOP_institute");
+		String branch    = request.getParameter("SOP_branch");
+		String operation = request.getParameter("SOP_operation");
+		String magnitude = request.getParameter("SOP_magnitude");
 		
 		System.out.println("\nPARAMETERS RECEIVED FOR SEAT OPERATION");
 		System.out.println("Institute --> " + institute);
@@ -63,12 +69,5 @@ public class AdminController
 		
 		AddAdminStuff(model);
 		return "admin";
-	}
-	
-	public void AddAdminStuff(Model model)
-	{
-		model.addAttribute("title", "UAC Administrators Area");
-		model.addAttribute("courses", Utility.GetCoursesNames());
-		model.addAttribute("institutes", adminService.GetAllInstitutes());
 	}
 }

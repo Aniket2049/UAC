@@ -2,35 +2,35 @@ package as.uac.bean;
 
 public class PreferenceListOption
 {
-	String	course;
-	String	institute;
+	String course;
+	String institute;
 	
-	public PreferenceListOption()
+	public PreferenceListOption ()
 	{
 	}
 	
-	public PreferenceListOption(String course, String institute)
+	public PreferenceListOption (String course, String institute)
 	{
-		this.course		= course;
-		this.institute	= institute;
+		this.course    = course;
+		this.institute = institute;
 	}
 	
-	public String getCourse()
+	public String getCourse ()
 	{
 		return course;
 	}
 	
-	public void setCourse(String course)
+	public void setCourse (String course)
 	{
 		this.course = course;
 	}
 	
-	public String getInstitute()
+	public String getInstitute ()
 	{
 		return institute;
 	}
 	
-	public void setInstitute(String institute)
+	public void setInstitute (String institute)
 	{
 		this.institute = institute;
 	}

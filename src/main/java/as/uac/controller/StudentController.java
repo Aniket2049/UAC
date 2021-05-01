@@ -1,37 +1,34 @@
 package as.uac.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import as.uac.bean.PreferenceListOption;
+import as.uac.service.StudentService;
+import as.uac.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import as.uac.bean.PreferenceListOption;
-import as.uac.service.StudentService;
-import as.uac.utility.Utility;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 public class StudentController
 {
+	public static List<PreferenceListOption> preferenceList;
+	public static int                        rank = 0;
 	@Autowired
 	StudentService studentService;
 	
-	public static List<PreferenceListOption>	preferenceList;
-	public static int							rank	= 0;
-	
 	@RequestMapping("/student")
-	public String ShowStudent(HttpServletRequest request, Model model)
+	public String ShowStudent (HttpServletRequest request, Model model)
 	{
-		HttpSession	httpSession	= request.getSession();
-		String		whoIs		= (String) httpSession.getAttribute(LoginController.WHO_IS);
+		HttpSession httpSession = request.getSession();
+		String      whoIs       = (String) httpSession.getAttribute(LoginController.WHO_IS);
 		
 		if ((whoIs != null) && whoIs.equalsIgnoreCase("student"))
 		{
@@ -45,9 +42,25 @@ public class StudentController
 		}
 	}
 	
+	public void AddStudentStuff (Model model)
+	{
+		if (rank == 0)
+		{
+			rank =
+				new Random().nextInt(10000 - 1) + 1;    // generate random rank of student, since no real exam was held
+			System.out.println("\nSTUDENT ASSIGNED RANK --> " + rank);
+		}
+		
+		model.addAttribute("title", "UAC Student Portal");
+		model.addAttribute("rank", StudentController.rank);
+		model.addAttribute("pList", preferenceList);
+		model.addAttribute("courses", Utility.GetCoursesNames());
+		model.addAttribute("instituteNames", studentService.GetInstitueNames());
+	}
+	
 	@RequestMapping("/addPListItem")
-	public String AddPreferenceListItem(@RequestParam("ins") String institute, @RequestParam("crs") String course,
-			Model model)
+	public String AddPreferenceListItem (@RequestParam("ins") String institute, @RequestParam("crs") String course,
+	                                     Model model)
 	{
 		System.out.println("\nPARAMETERS RECEIVED FOR PREFERENCE LIST ADDITION");
 		System.out.println("COURSE    --> " + course);
@@ -67,14 +80,14 @@ public class StudentController
 			System.out.println("COURSE 	  : " + pListOption.getCourse());
 			System.out.println("INSTITUTE : " + pListOption.getInstitute());
 			
-			if (pListOption.getCourse().equalsIgnoreCase(course)
-					&& pListOption.getInstitute().equalsIgnoreCase(institute))
+			if (pListOption.getCourse().equalsIgnoreCase(course) &&
+			    pListOption.getInstitute().equalsIgnoreCase(institute))
 			{
 				System.out.println("!!! OPTION ALREADY EXISTS IN THE LIST");
 				System.out.println("MATCH FOUND AT INDEX --> " + i);
 				
 				model.addAttribute("studentPageMessage",
-						Utility.HTMLInfoFormat("This choice already exists in the List", "info"));
+				                   Utility.HTMLInfoFormat("This choice already exists in the List", "info"));
 				AddStudentStuff(model);
 				return "student";
 			}
@@ -95,15 +108,15 @@ public class StudentController
 	}
 	
 	@RequestMapping("/movePListItem")
-	public String MovePreferenceListItem(@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
-			@RequestParam("move") String move, Model model)
+	public String MovePreferenceListItem (@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
+	                                      @RequestParam("move") String move, Model model)
 	{
 		System.out.println("\nPARAMETERS RECEIVED FOR MOVING PREFERENCE LIST OPTION");
 		System.out.println("COURSE 	  : " + course);
 		System.out.println("INSTITUTE : " + institute);
 		System.out.println("MOVE	  : " + move);
 		
-		int requiredIndex = -1;
+		int requiredIndex = - 1;
 		
 		System.out.println("\nITERATING THROUGH PREFERENCE LIST TO MATCH OPTIONS FOR SWAPPING " + move.toUpperCase());
 		for (int i = 0; i < preferenceList.size(); i++)
@@ -114,8 +127,8 @@ public class StudentController
 			System.out.println("COURSE 	  : " + pListOption.getCourse());
 			System.out.println("INSTITUTE : " + pListOption.getInstitute());
 			
-			if (pListOption.getCourse().equalsIgnoreCase(course)
-					&& pListOption.getInstitute().equalsIgnoreCase(institute))
+			if (pListOption.getCourse().equalsIgnoreCase(course) &&
+			    pListOption.getInstitute().equalsIgnoreCase(institute))
 			{
 				if (i == 0 && move.equalsIgnoreCase("UP"))
 				{
@@ -138,7 +151,7 @@ public class StudentController
 			}
 		}
 		
-		if (requiredIndex == -1)
+		if (requiredIndex == - 1)
 		{
 			model.addAttribute("studentPageMessage", Utility.HTMLInfoFormat("Invalid Options", "error"));
 			AddStudentStuff(model);
@@ -159,8 +172,8 @@ public class StudentController
 	}
 	
 	@RequestMapping("/delPListItem")
-	public String DeletePreferenceListItem(@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
-			Model model)
+	public String DeletePreferenceListItem (@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
+	                                        Model model)
 	{
 		System.out.println("\nPARAMETERS RECEIVED FOR DELETING PREFERENCE LIST OPTION");
 		System.out.println("COURSE 	  : " + course);
@@ -175,8 +188,8 @@ public class StudentController
 			System.out.println("COURSE 	  : " + pListOption.getCourse());
 			System.out.println("INSTITUTE : " + pListOption.getInstitute());
 			
-			if (pListOption.getCourse().equalsIgnoreCase(course)
-					&& pListOption.getInstitute().equalsIgnoreCase(institute))
+			if (pListOption.getCourse().equalsIgnoreCase(course) &&
+			    pListOption.getInstitute().equalsIgnoreCase(institute))
 			{
 				System.out.println("OPTION EXISTS IN THE LIST");
 				System.out.println("MATCH FOUND AT INDEX --> " + i);
@@ -197,7 +210,7 @@ public class StudentController
 	}
 	
 	@RequestMapping("/getAdmission")
-	public String GetAdmission(HttpServletRequest request, Model model)
+	public String GetAdmission (HttpServletRequest request, Model model)
 	{
 		System.out.println("\nREQUEST FOR ADMISSION RECEIVED");
 		System.out.println("STUDENT RANK --> " + rank);
@@ -215,25 +228,10 @@ public class StudentController
 		
 		HttpSession httpSession = request.getSession();
 		httpSession.invalidate();
-		StudentController.preferenceList	= null;
-		StudentController.rank				= 0;
+		StudentController.preferenceList = null;
+		StudentController.rank           = 0;
 		
 		model.addAttribute("title", "ADMISSION RESULTS");
 		return "admission-result";
-	}
-	
-	public void AddStudentStuff(Model model)
-	{
-		if (rank == 0)
-		{
-			rank = new Random().nextInt(10000 - 1) + 1;	// generate random rank of student, since no real exam was held
-			System.out.println("\nSTUDENT ASSIGNED RANK --> " + rank);
-		}
-		
-		model.addAttribute("title", "UAC Student Portal");
-		model.addAttribute("rank", StudentController.rank);
-		model.addAttribute("pList", preferenceList);
-		model.addAttribute("courses", Utility.GetCoursesNames());
-		model.addAttribute("instituteNames", studentService.GetInstitueNames());
 	}
 }

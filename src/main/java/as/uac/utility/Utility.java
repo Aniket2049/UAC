@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Utility
 {
-	public static List<String> GetCoursesNames()
+	public static List<String> GetCoursesNames ()
 	{
 		List<String> courses = new ArrayList<String>();
 		courses.add("Computer Science & Engineering");
@@ -24,11 +24,11 @@ public class Utility
 		return courses;
 	}
 	
-	public static String MapCourseNameToDBColumnName(String displayName)
+	public static String MapCourseNameToDBColumnName (String displayName)
 	{
 		String dbColName = null;
 		System.out.println("\nMAPPING -->" + displayName);
-		switch (displayName)			// map display names to database column names, for query use
+		switch (displayName)            // map display names to database column names, for query use
 		{
 			case "Computer Science & Engineering":
 				dbColName = "cse";
@@ -51,7 +51,7 @@ public class Utility
 		return dbColName;
 	}
 	
-	public static String HTMLInfoFormat(String message, String type)
+	public static String HTMLInfoFormat (String message, String type)
 	{
 		switch (type)
 		{
