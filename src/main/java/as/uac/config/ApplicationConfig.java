@@ -49,6 +49,8 @@ public class ApplicationConfig implements WebMvcConfigurer
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
+	// ----- HIBERNATE SETTINGS ----- //
+	
 	@Bean
 	public LocalSessionFactoryBean FactoryBean ()
 	{
@@ -61,7 +63,6 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return factoryBean;
 	}
 	
-	// ----- HIBERNATE SETTINGS ----- //
 	@Bean
 	public DataSource DataSource ()
 	{
@@ -97,15 +98,6 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return props;
 	}
 	
-	// ----- UTILITY METHOD TO CONVERT STRING TO INT ----- //
-	private int GetIntProperty (String propName)
-	{
-		String propVal    = environment.getProperty(propName);
-		int    intPropVal = Integer.parseInt(propVal);
-		
-		return intPropVal;
-	}
-	
 	@Bean
 	@Autowired
 	public HibernateTransactionManager TransactionManager (SessionFactory sessionFactory)
@@ -114,5 +106,14 @@ public class ApplicationConfig implements WebMvcConfigurer
 		txManager.setSessionFactory(sessionFactory);
 		
 		return txManager;
+	}
+	
+	// ----- UTILITY METHOD TO CONVERT STRING TO INT ----- //
+	private int GetIntProperty (String propName)
+	{
+		String propVal    = environment.getProperty(propName);
+		int    intPropVal = Integer.parseInt(propVal);
+		
+		return intPropVal;
 	}
 }
