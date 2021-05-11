@@ -37,9 +37,12 @@
 <body>
 <div class = "container">
 	<br>
+	
 	<h1 class = "text-center">Register for University Admission Counseling Webapp</h1>
+	
 	<hr>
 	<br>
+	
 	<div class = "row">
 		<div class = "col-sm-4"></div>
 		<div class = "col-sm-4">
@@ -50,18 +53,25 @@
 				<div class = "form-group">
 					<input type = "text" name = "name" class = "form-control text-center" placeholder = "Your Name"/>
 				</div>
+				
 				<div class = "form-group">
 					<input type = "text" name = "username" class = "form-control text-center" placeholder = "Username"/>
 				</div>
+				
 				<div class = "form-group">
-					<input type = "password" name = "password" class = "form-control text-center" placeholder = "Password"/>
+					<input type = "password"
+					       name = "password"
+					       class = "form-control text-center"
+					       placeholder = "Password"/>
 				</div>
+				
 				<div class = "form-group">
 					<select class = "form-control text-center" name = "privilege">
 						<option value = "Admin">Administrator</option>
 						<option value = "Student">Student</option>
 					</select>
 				</div>
+				
 				<input type = "submit" class = "btn btn-success btn-block" value = "Register" class = "button"/>
 			</form>
 		</div>
