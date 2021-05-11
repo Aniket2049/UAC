@@ -44,10 +44,10 @@
 	<div class = "row">
 		<div class = "col-sm-4"></div>
 		<div class = "col-sm-2">
-			<a href = "login-form" class = "btn btn-secondary btn-block">Login</a>
+			<a href = "login-form" class = "btn btn-primary btn-block">Login</a>
 		</div>
 		<div class = "col-sm-2">
-			<a href = "registration" class = "btn btn-secondary btn-block">Register</a>
+			<a href = "registration" class = "btn btn-primary btn-block">Register</a>
 		</div>
 		<div class = "col-sm-4"></div>
 	</div>
