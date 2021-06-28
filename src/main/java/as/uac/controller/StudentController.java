@@ -25,7 +25,7 @@ public class StudentController
 	StudentService studentService;
 	
 	@RequestMapping("/student")
-	public String ShowStudent (HttpServletRequest request, Model model)
+	public String ShowStudent(HttpServletRequest request, Model model)
 	{
 		HttpSession httpSession = request.getSession();
 		String      whoIs       = (String) httpSession.getAttribute(LoginController.WHO_IS);
@@ -42,12 +42,12 @@ public class StudentController
 		}
 	}
 	
-	public void AddStudentStuff (Model model)
+	public void AddStudentStuff(Model model)
 	{
 		if (rank == 0)
 		{
-			rank =
-				new Random().nextInt(10000 - 1) + 1;    // generate random rank of student, since no real exam was held
+			rank = new Random().nextInt(10000 - 1) +
+			       1;    // generate random rank of student, since no real exam was held
 			System.out.println("\nSTUDENT ASSIGNED RANK --> " + rank);
 		}
 		
@@ -59,8 +59,8 @@ public class StudentController
 	}
 	
 	@RequestMapping("/addPListItem")
-	public String AddPreferenceListItem (@RequestParam("ins") String institute, @RequestParam("crs") String course,
-	                                     Model model)
+	public String AddPreferenceListItem(@RequestParam("ins") String institute, @RequestParam("crs") String course,
+	                                    Model model)
 	{
 		System.out.println("\nPARAMETERS RECEIVED FOR PREFERENCE LIST ADDITION");
 		System.out.println("COURSE    --> " + course);
@@ -80,8 +80,8 @@ public class StudentController
 			System.out.println("COURSE 	  : " + pListOption.getCourse());
 			System.out.println("INSTITUTE : " + pListOption.getInstitute());
 			
-			if (pListOption.getCourse().equalsIgnoreCase(course) &&
-			    pListOption.getInstitute().equalsIgnoreCase(institute))
+			if (pListOption.getCourse().equalsIgnoreCase(course) && pListOption.getInstitute().equalsIgnoreCase(
+				institute))
 			{
 				System.out.println("!!! OPTION ALREADY EXISTS IN THE LIST");
 				System.out.println("MATCH FOUND AT INDEX --> " + i);
@@ -108,15 +108,15 @@ public class StudentController
 	}
 	
 	@RequestMapping("/movePListItem")
-	public String MovePreferenceListItem (@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
-	                                      @RequestParam("move") String move, Model model)
+	public String MovePreferenceListItem(@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
+	                                     @RequestParam("move") String move, Model model)
 	{
 		System.out.println("\nPARAMETERS RECEIVED FOR MOVING PREFERENCE LIST OPTION");
 		System.out.println("COURSE 	  : " + course);
 		System.out.println("INSTITUTE : " + institute);
 		System.out.println("MOVE	  : " + move);
 		
-		int requiredIndex = - 1;
+		int requiredIndex = -1;
 		
 		System.out.println("\nITERATING THROUGH PREFERENCE LIST TO MATCH OPTIONS FOR SWAPPING " + move.toUpperCase());
 		for (int i = 0; i < preferenceList.size(); i++)
@@ -127,8 +127,8 @@ public class StudentController
 			System.out.println("COURSE 	  : " + pListOption.getCourse());
 			System.out.println("INSTITUTE : " + pListOption.getInstitute());
 			
-			if (pListOption.getCourse().equalsIgnoreCase(course) &&
-			    pListOption.getInstitute().equalsIgnoreCase(institute))
+			if (pListOption.getCourse().equalsIgnoreCase(course) && pListOption.getInstitute().equalsIgnoreCase(
+				institute))
 			{
 				if (i == 0 && move.equalsIgnoreCase("UP"))
 				{
@@ -151,7 +151,7 @@ public class StudentController
 			}
 		}
 		
-		if (requiredIndex == - 1)
+		if (requiredIndex == -1)
 		{
 			model.addAttribute("studentPageMessage", Utility.HTMLInfoFormat("Invalid Options", "error"));
 			AddStudentStuff(model);
@@ -172,8 +172,8 @@ public class StudentController
 	}
 	
 	@RequestMapping("/delPListItem")
-	public String DeletePreferenceListItem (@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
-	                                        Model model)
+	public String DeletePreferenceListItem(@RequestParam("pIns") String institute, @RequestParam("pCrs") String course,
+	                                       Model model)
 	{
 		System.out.println("\nPARAMETERS RECEIVED FOR DELETING PREFERENCE LIST OPTION");
 		System.out.println("COURSE 	  : " + course);
@@ -188,8 +188,8 @@ public class StudentController
 			System.out.println("COURSE 	  : " + pListOption.getCourse());
 			System.out.println("INSTITUTE : " + pListOption.getInstitute());
 			
-			if (pListOption.getCourse().equalsIgnoreCase(course) &&
-			    pListOption.getInstitute().equalsIgnoreCase(institute))
+			if (pListOption.getCourse().equalsIgnoreCase(course) && pListOption.getInstitute().equalsIgnoreCase(
+				institute))
 			{
 				System.out.println("OPTION EXISTS IN THE LIST");
 				System.out.println("MATCH FOUND AT INDEX --> " + i);
@@ -210,7 +210,7 @@ public class StudentController
 	}
 	
 	@RequestMapping("/getAdmission")
-	public String GetAdmission (HttpServletRequest request, Model model)
+	public String GetAdmission(HttpServletRequest request, Model model)
 	{
 		System.out.println("\nREQUEST FOR ADMISSION RECEIVED");
 		System.out.println("STUDENT RANK --> " + rank);

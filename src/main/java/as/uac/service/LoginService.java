@@ -12,7 +12,7 @@ public class LoginService
 	LoginDAO loginDAO;
 	
 	@Transactional
-	public String AuthenticateUser (String username, String password)
+	public String AuthenticateUser(String username, String password)
 	{
 		return loginDAO.AuthenticateUser(username, password);
 	}

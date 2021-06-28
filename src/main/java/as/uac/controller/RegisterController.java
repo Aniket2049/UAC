@@ -18,14 +18,14 @@ public class RegisterController
 	RegisterService registerService;
 	
 	@RequestMapping("/registration")
-	public String ShowRegistrationForm (Model model)
+	public String ShowRegistrationForm(Model model)
 	{
 		model.addAttribute("newUser", new User());
 		return "register";
 	}
 	
 	@PostMapping("/processRegistration")
-	public String ProcessRegistration (HttpServletRequest request, Model model)
+	public String ProcessRegistration(HttpServletRequest request, Model model)
 	{
 		String name      = request.getParameter("name");
 		String username  = request.getParameter("username");
@@ -39,16 +39,15 @@ public class RegisterController
 		System.out.println("PRIVILEGE-->" + privilege);
 		if (name.equalsIgnoreCase("") || username.equalsIgnoreCase("") || password.equalsIgnoreCase(""))
 		{
-			model
-				.addAttribute("registerPageMessage", Utility.HTMLInfoFormat("Please fill in all the fields!", "error"));
+			model.addAttribute("registerPageMessage",
+			                   Utility.HTMLInfoFormat("Please fill in all the fields!", "error"));
 			return "register";
 		}
 		
 		try
 		{
 			registerService.SaveUser(new User(name, username, password, privilege));
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 			model.addAttribute("registerPageMessage",

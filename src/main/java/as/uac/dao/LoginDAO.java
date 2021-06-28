@@ -13,7 +13,7 @@ public class LoginDAO
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public String AuthenticateUser (String username, String password)
+	public String AuthenticateUser(String username, String password)
 	{
 		String result = "NoSuchUser";
 		

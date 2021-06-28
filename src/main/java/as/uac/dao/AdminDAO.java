@@ -23,7 +23,7 @@ public class AdminDAO
 	@Autowired
 	private Environment environment;
 	
-	public List<Institute> GetAllInstitutes ()
+	public List<Institute> GetAllInstitutes()
 	{
 		Session          session          = sessionFactory.getCurrentSession();
 		Query<Institute> institutes_query = session.createQuery("from Institute", Institute.class);
@@ -40,7 +40,7 @@ public class AdminDAO
 		
 	}
 	
-	public int SeatOperation (String institute, String branch, String operation, String magnitude)
+	public int SeatOperation(String institute, String branch, String operation, String magnitude)
 	{
 		int status = 0;
 		
@@ -61,23 +61,20 @@ public class AdminDAO
 			
 			if (operation.equals("Add"))
 			{
-				query =
-					"UPDATE `uac_db1`.`seats` SET " + branch + " = " + branch + " + " + magnitude + " WHERE `id` = " +
-					instituteID + ";";
+				query = "UPDATE `uac_db1`.`seats` SET " + branch + " = " + branch + " + " + magnitude +
+				        " WHERE `id` = " + instituteID + ";";
 			}
 			else if (operation.equals("Subtract"))
 			{
-				query =
-					"UPDATE `uac_db1`.`seats` SET " + branch + " = " + branch + " - " + magnitude + " WHERE `id` = " +
-					instituteID + ";";
+				query = "UPDATE `uac_db1`.`seats` SET " + branch + " = " + branch + " - " + magnitude +
+				        " WHERE `id` = " + instituteID + ";";
 			}
 			
 			status = statement.executeUpdate(query);
 			System.out.println("\nQUERY EXECUTED SUCCESSFULLY");
 			System.out.println("QUERY --> " + query);
 			connection.close();
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -85,7 +82,7 @@ public class AdminDAO
 		return status;
 	}
 	
-	public int GetInstituteID (String institute)
+	public int GetInstituteID(String institute)
 	{
 		int instituteID = 0;
 		

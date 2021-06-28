@@ -15,12 +15,12 @@ public class StudentService
 	StudentDAO studentDAO;
 	
 	@Transactional
-	public List<String> GetInstitueNames ()
+	public List<String> GetInstitueNames()
 	{
 		return studentDAO.GetInstitueNames();
 	}
 	
-	public String GetAdmission (List<PreferenceListOption> preferenceList, int rank)
+	public String GetAdmission(List<PreferenceListOption> preferenceList, int rank)
 	{
 		return studentDAO.GetAdmission(preferenceList, rank);
 	}

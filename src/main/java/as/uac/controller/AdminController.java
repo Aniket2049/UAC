@@ -18,7 +18,7 @@ public class AdminController
 	AdminService adminService;
 	
 	@RequestMapping("/admin")
-	public String ShowAdmin (HttpServletRequest request, Model model)
+	public String ShowAdmin(HttpServletRequest request, Model model)
 	{
 		HttpSession httpSession = request.getSession();
 		String      whoIs       = (String) httpSession.getAttribute(LoginController.WHO_IS);
@@ -35,7 +35,7 @@ public class AdminController
 		}
 	}
 	
-	public void AddAdminStuff (Model model)
+	public void AddAdminStuff(Model model)
 	{
 		model.addAttribute("title", "UAC Administrators Area");
 		model.addAttribute("courses", Utility.GetCoursesNames());
@@ -43,12 +43,12 @@ public class AdminController
 	}
 	
 	@PostMapping("/seatOp")
-	public String ProcessSeatOperation (HttpServletRequest request, Model model)
+	public String ProcessSeatOperation(HttpServletRequest request, Model model)
 	{
 		HttpSession httpSession = request.getSession();
 		String      whoIs       = (String) httpSession.getAttribute(LoginController.WHO_IS);
 		
-		if (! whoIs.equalsIgnoreCase("admin"))
+		if (!whoIs.equalsIgnoreCase("admin"))
 		{
 			model.addAttribute("loginPageMessage", Utility.HTMLInfoFormat("Login as ADMIN to access!", "error"));
 			return "login";

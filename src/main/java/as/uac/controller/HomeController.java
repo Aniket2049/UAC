@@ -12,7 +12,7 @@ public class HomeController
 {
 	
 	@RequestMapping("/")
-	public String ShowHome (HttpServletRequest request, Model model)
+	public String ShowHome(HttpServletRequest request, Model model)
 	{
 		HttpSession httpSession = null;
 		

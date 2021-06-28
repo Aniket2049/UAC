@@ -26,13 +26,13 @@ public class LoginController
 	StudentController studentController;
 	
 	@RequestMapping("/login-form")
-	public String ShowLogin ()
+	public String ShowLogin()
 	{
 		return "login";
 	}
 	
 	@PostMapping("/login")
-	public String Login (HttpServletRequest request, Model model)
+	public String Login(HttpServletRequest request, Model model)
 	{
 		String username   = (String) request.getParameter("username");
 		String password   = (String) request.getParameter("password");
@@ -67,7 +67,7 @@ public class LoginController
 	}
 	
 	@RequestMapping("/logout")
-	public String Logout (HttpServletRequest request, Model model)
+	public String Logout(HttpServletRequest request, Model model)
 	{
 		HttpSession httpSession = request.getSession();
 		httpSession.invalidate();

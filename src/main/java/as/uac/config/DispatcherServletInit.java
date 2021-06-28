@@ -6,21 +6,21 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
 {
 	
 	@Override
-	protected Class<?>[] getRootConfigClasses ()
+	protected Class<?>[] getRootConfigClasses()
 	{
 		return null;
 	}
 	
 	@Override
-	protected Class<?>[] getServletConfigClasses ()
+	protected Class<?>[] getServletConfigClasses()
 	{
-		return new Class[] {ApplicationConfig.class};
+		return new Class[] { ApplicationConfig.class };
 	}
 	
 	@Override
-	protected String[] getServletMappings ()
+	protected String[] getServletMappings()
 	{
-		return new String[] {"/"};
+		return new String[] { "/" };
 	}
 	
 }

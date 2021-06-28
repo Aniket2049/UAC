@@ -12,7 +12,7 @@ public class RegisterDAO
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public void SaveUser (User user)
+	public void SaveUser(User user)
 	{
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(user);

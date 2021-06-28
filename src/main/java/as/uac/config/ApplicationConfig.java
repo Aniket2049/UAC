@@ -32,7 +32,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 	
 	// ----- VIEW RESOLVER FOR SPRING WEB MVC ----- //
 	@Bean
-	public ViewResolver viewResolver ()
+	public ViewResolver viewResolver()
 	{
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		
@@ -44,7 +44,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 	
 	// ----- FOR CSS/JS/OTHER HTML STUFF ----- //
 	@Override
-	public void addResourceHandlers (final ResourceHandlerRegistry registry)
+	public void addResourceHandlers(final ResourceHandlerRegistry registry)
 	{
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
@@ -52,7 +52,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 	// ----- HIBERNATE SETTINGS ----- //
 	
 	@Bean
-	public LocalSessionFactoryBean FactoryBean ()
+	public LocalSessionFactoryBean FactoryBean()
 	{
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		
@@ -64,7 +64,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 	}
 	
 	@Bean
-	public DataSource DataSource ()
+	public DataSource DataSource()
 	{
 		ComboPooledDataSource dataSource = new ComboPooledDataSource();
 		
@@ -79,8 +79,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 			dataSource.setMinPoolSize(GetIntProperty("connection.pool.minPoolSize"));
 			dataSource.setMaxPoolSize(GetIntProperty("connection.pool.maxPoolSize"));
 			dataSource.setMaxIdleTime(GetIntProperty("connection.pool.maxIdleTime"));
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -88,7 +87,7 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return dataSource;
 	}
 	
-	private Properties GetHibernateProperties ()
+	private Properties GetHibernateProperties()
 	{
 		Properties props = new Properties();
 		
@@ -98,22 +97,21 @@ public class ApplicationConfig implements WebMvcConfigurer
 		return props;
 	}
 	
+	// ----- UTILITY METHOD TO CONVERT STRING TO INT ----- //
+	private int GetIntProperty(String propName)
+	{
+		String propVal = environment.getProperty(propName);
+		
+		return Integer.parseInt(propVal);
+	}
+	
 	@Bean
 	@Autowired
-	public HibernateTransactionManager TransactionManager (SessionFactory sessionFactory)
+	public HibernateTransactionManager TransactionManager(SessionFactory sessionFactory)
 	{
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
 		
 		return txManager;
-	}
-	
-	// ----- UTILITY METHOD TO CONVERT STRING TO INT ----- //
-	private int GetIntProperty (String propName)
-	{
-		String propVal    = environment.getProperty(propName);
-		int    intPropVal = Integer.parseInt(propVal);
-		
-		return intPropVal;
 	}
 }

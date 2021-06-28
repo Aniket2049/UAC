@@ -15,13 +15,13 @@ public class AdminService
 	AdminDAO adminDAO;
 	
 	@Transactional
-	public List<Institute> GetAllInstitutes ()
+	public List<Institute> GetAllInstitutes()
 	{
 		return adminDAO.GetAllInstitutes();
 	}
 	
 	@Transactional
-	public int SeatOperation (String institute, String branch, String operation, String magnitude)
+	public int SeatOperation(String institute, String branch, String operation, String magnitude)
 	{
 		return adminDAO.SeatOperation(institute, branch, operation, magnitude);
 	}

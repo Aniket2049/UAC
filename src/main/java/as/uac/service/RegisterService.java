@@ -13,7 +13,7 @@ public class RegisterService
 	RegisterDAO registerDAO;
 	
 	@Transactional
-	public void SaveUser (User user)
+	public void SaveUser(User user)
 	{
 		registerDAO.SaveUser(user);
 	}

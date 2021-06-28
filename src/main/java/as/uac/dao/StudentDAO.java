@@ -28,7 +28,7 @@ public class StudentDAO
 	private Environment environment;
 	
 	@Transactional
-	public List<String> GetInstitueNames ()
+	public List<String> GetInstitueNames()
 	{
 		Session          session          = sessionFactory.getCurrentSession();
 		Query<Institute> institutes_query = session.createQuery("from Institute", Institute.class);
@@ -39,8 +39,7 @@ public class StudentDAO
 		{
 			institutes     = institutes_query.getResultList();
 			instituteNames = new ArrayList<String>();
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -56,7 +55,7 @@ public class StudentDAO
 		return instituteNames;
 	}
 	
-	public String GetAdmission (List<PreferenceListOption> preferenceList, int rank)
+	public String GetAdmission(List<PreferenceListOption> preferenceList, int rank)
 	{
 		String admissionResult = "You failed to secure a seat";
 		
@@ -114,16 +113,15 @@ public class StudentDAO
 							" WITH COURSE " + pListOption.getCourse());
 					}
 					
-					admissionResult =
-						"ADMISSION SUCCESSFUL with " + pListOption.getCourse() + " AT " + pListOption.getInstitute();
+					admissionResult = "ADMISSION SUCCESSFUL with " + pListOption.getCourse() + " AT " +
+					                  pListOption.getInstitute();
 					break;
 				}
 				
 			}
 			
 			connection.close();
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}

@@ -31,11 +31,11 @@ public class Institute
 	@Column(name = "ce")
 	public int ce;
 	
-	public Institute ()
+	public Institute()
 	{
 	}
 	
-	public Institute (String name, int cse, int it, int ece, int me, int ce)
+	public Institute(String name, int cse, int it, int ece, int me, int ce)
 	{
 		this.name = name;
 		this.cse  = cse;
@@ -45,7 +45,7 @@ public class Institute
 		this.ce   = ce;
 	}
 	
-	public Institute (int id, String name, int cse, int it, int ece, int me, int ce)
+	public Institute(int id, String name, int cse, int it, int ece, int me, int ce)
 	{
 		this.id   = id;
 		this.name = name;
@@ -56,72 +56,72 @@ public class Institute
 		this.ce   = ce;
 	}
 	
-	public int getId ()
+	public int getId()
 	{
 		return id;
 	}
 	
-	public void setId (int id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}
 	
-	public String getName ()
+	public String getName()
 	{
 		return name;
 	}
 	
-	public void setName (String name)
+	public void setName(String name)
 	{
 		this.name = name;
 	}
 	
-	public int getCse ()
+	public int getCse()
 	{
 		return cse;
 	}
 	
-	public void setCse (int cse)
+	public void setCse(int cse)
 	{
 		this.cse = cse;
 	}
 	
-	public int getIt ()
+	public int getIt()
 	{
 		return it;
 	}
 	
-	public void setIt (int it)
+	public void setIt(int it)
 	{
 		this.it = it;
 	}
 	
-	public int getEce ()
+	public int getEce()
 	{
 		return ece;
 	}
 	
-	public void setEce (int ece)
+	public void setEce(int ece)
 	{
 		this.ece = ece;
 	}
 	
-	public int getMe ()
+	public int getMe()
 	{
 		return me;
 	}
 	
-	public void setMe (int me)
+	public void setMe(int me)
 	{
 		this.me = me;
 	}
 	
-	public int getCe ()
+	public int getCe()
 	{
 		return ce;
 	}
 	
-	public void setCe (int ce)
+	public void setCe(int ce)
 	{
 		this.ce = ce;
 	}
